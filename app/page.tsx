@@ -1,22 +1,15 @@
 "use client";
 
 import { motion } from "motion/react";
+import Typewriter from 'typewriter-effect';
+
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-900 text-zinc-200 overflow-hidden">
 
- 
-      <nav className="fixed top-0 left-0 w-full z-20 backdrop-blur-md bg-zinc-900/70">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-          <div className="text-xl font-bold text-zinc-200">Giovanni B.</div>
-          <div className="flex gap-6">
-            <a href="#projetos" className="hover:text-zinc-400 transition-colors">Projetos</a>
-            <a href="#sobre" className="hover:text-zinc-400 transition-colors">Sobre</a>
-            <a href="#contato" className="hover:text-zinc-400 transition-colors">Contato</a>
-          </div>
-        </div>
-      </nav>
+
+
 
       <div className="absolute inset-0 bg-gradient-to-tr from-zinc-700 via-zinc-600 to-zinc-700 opacity-20 blur-3xl animate-pulse"></div>
 
@@ -29,6 +22,16 @@ export default function Home() {
         >
           Giovanni Buscarino Benedetti
         </motion.h1>
+        <div className="text-3xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-zinc-100">
+          <Typewriter
+            options={{
+              strings: ['Full stack developer', 'Cybersecurity student'],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </div>
+
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -61,6 +64,7 @@ export default function Home() {
         </motion.div>
       </div>
 
+  
 
     </div>
   );
