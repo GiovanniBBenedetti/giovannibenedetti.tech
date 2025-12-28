@@ -7,7 +7,7 @@ import {
   FaGithub, FaExternalLinkAlt, FaGlobe, FaEnvelope, FaLinkedin,
   FaPaperPlane, FaCode, FaShieldAlt, FaTerminal, FaDatabase,
   FaServer, FaLock, FaSearch, FaMobileAlt, FaExclamationTriangle, FaTimes,
-  FaJs, FaReact, FaNodeJs, FaPython, FaDocker, FaPhp 
+  FaJs, FaReact, FaNodeJs, FaPython, FaDocker, FaPhp
 } from "react-icons/fa";
 import {
   SiTypescript, SiNextdotjs, SiTailwindcss, SiPostgresql,
@@ -16,13 +16,19 @@ import {
 
 const translations = {
   pt: {
-    nav: ["Início", "Projetos", "Sobre", "Experiência", "Contato"],
+    nav: ["Início", "Projetos", "Galeria", "Sobre", "Experiência", "Contato"],
     status: "Disponível para novos projetos",
     heroTitle: "Giovanni Benedetti",
     heroSubtitle: ["Desenvolvedor Full Stack", "Estudante de Cibersegurança", "Solucionador de Problemas"],
     heroDesc: "Transformando linhas de código em experiências digitais de alto impacto. Especialista em construir aplicações escaláveis e seguras.",
     btnProjects: "Ver Projetos",
     btnContact: "Contato",
+    stats: {
+      exp: "Anos de\nexperiência",
+      projects: "Projetos\nconcluídos",
+      techs: "Tecnologias\ndominadas",
+      commits: "Commits\nde código"
+    },
     sectionTitle: "Projetos",
     sectionHighlight: "Destaques",
     aboutTitle: "Sobre",
@@ -71,15 +77,22 @@ const translations = {
       { title: "MusicHouse", desc: "Sistema robusto de gerenciamento de estoque e controle de franquias para lojas de música." },
       { title: "Zelos", desc: "Sistema de gerenciamento de chamados desenvolvido para o SENAI. Otimiza o suporte interno e a manutenção da instituição." }
     ],
+    galleryTitle: "Galeria",
   },
   en: {
-    nav: ["Home", "Projects", "About", "Experience", "Contact"],
+    nav: ["Home", "Projects", "Gallery", "About", "Experience", "Contact"],
     status: "Available for new projects",
     heroTitle: "Giovanni Benedetti",
     heroSubtitle: ["Full Stack Developer", "Cybersecurity Student", "Problem Solver"],
     heroDesc: "Transforming code into high-impact digital experiences. Specialist in building scalable and secure applications.",
     btnProjects: "View Projects",
     btnContact: "Contact",
+    stats: {
+      exp: "Years of\nexperience",
+      projects: "Projects\ncompleted",
+      techs: "Technologies\nmastered",
+      commits: "Code\ncommits"
+    },
     sectionTitle: "Featured",
     sectionHighlight: "Projects",
     aboutTitle: "About",
@@ -128,15 +141,22 @@ const translations = {
       { title: "MusicHouse", desc: "Robust inventory management and franchise control system for musical instrument stores." },
       { title: "Zelos", desc: "Ticketing management system developed for SENAI. Optimizes internal support and institutional maintenance." }
     ],
+    galleryTitle: "Gallery",
   },
   es: {
-    nav: ["Inicio", "Proyectos", "Sobre", "Experiencia", "Contacto"],
+    nav: ["Inicio", "Proyectos", "Galería", "Sobre", "Experiencia", "Contacto"],
     status: "Disponible para proyectos",
     heroTitle: "Giovanni Benedetti",
     heroSubtitle: ["Full Stack Dev", "Seguridad Estudiante", "Problem Solver"],
     heroDesc: "Transformando código en experiencias digitales de alto impacto. Especialista en crear aplicaciones escalables y seguras.",
     btnProjects: "Ver Proyectos",
     btnContact: "Contacto",
+    stats: {
+      exp: "Años de\nexperiencia",
+      projects: "Proyectos\ncompletados",
+      techs: "Tecnologías\ndominadas",
+      commits: "Commits\nde código"
+    },
     sectionTitle: "Proyectos",
     sectionHighlight: "Destacados",
     aboutTitle: "Sobre",
@@ -161,7 +181,7 @@ const translations = {
         date: "2026 - 2027",
         title: "Grado Tecnológico en Informática (Ciberseguridad)",
         company: "Escuela SENAI \"Paulo Antonio Skaf\"",
-        desc: "Educación superior centrada en infraestructura, defensa de redes y análisis de vulnerabilidades."
+        desc: "Educación superior centrada en infraestructura, defensa de redes e análisis de vulnerabilidades."
       },
       {
         date: "2024 - 2025",
@@ -185,22 +205,83 @@ const translations = {
       { title: "MusicHouse", desc: "Sistema robusto de gestión de inventario y control de franquicias para tiendas de música." },
       { title: "Zelos", desc: "Sistema de gestión de tickets desarrollado para el SENAI. Optimiza el soporte interno y el mantenimiento." }
     ],
+    galleryTitle: "Galería",
   }
 };
 
-function TechMarquee() {
-const techs = [
-  { name: "JavaScript", icon: <FaJs className="text-[#F7DF1E]" /> },
-  { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
-  { name: "PHP", icon: <FaPhp className="text-[#777BB4]" /> },
-  { name: "React", icon: <FaReact className="text-[#61DAFB]" /> },
-  { name: "Next.js", icon: <SiNextdotjs className="text-white" /> },
-  { name: "Node.js", icon: <FaNodeJs className="text-[#339933]" /> },
-  { name: "Tailwind", icon: <SiTailwindcss className="text-[#06B6D4]" /> },
-  { name: "MySQL", icon: <SiMysql className="text-[#4479A1]" /> },
-  { name: "Docker", icon: <FaDocker className="text-[#2496ED]" /> },
-  { name: "Linux", icon: <SiLinux className="text-white" /> },
+
+const galleryImages = [
+  { url: "/galeria/Lumier.png", tipo: "Apresentação", label: "Projeto Lumier" },
+  { url: "/galeria/Lumier2.jpg", tipo: "Apresentação", label: "Projeto Lumier" },
+  { url: "/galeria/MusicHouse.jpg", tipo: "Apresentação", label: "Music House" },
+  { url: "/galeria/MusicHouse2.jpg", tipo: "Apresentação", label: "Grupo Music House" },
+  { url: "/galeria/FormaturaSenai.jpeg", tipo: "Formatura", label: "SENAI Armando de Arruda Pereira 2025" },
 ];
+
+function GallerySection({ title }: { title: string }) {
+  return (
+    <section className="py-24 border-t border-white/5 bg-zinc-950/20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 mb-12">
+        <h2 className="text-4xl font-black text-white uppercase tracking-tighter">
+          {title}
+        </h2>
+        <div className="w-20 h-1 bg-blue-600 mt-2"></div>
+      </div>
+
+      <div className="relative flex">
+        <motion.div
+          animate={{ x: [0, -1200] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="flex gap-6 whitespace-nowrap"
+        >
+
+          {[...galleryImages, ...galleryImages, ...galleryImages].map((item, i) => (
+            <div
+              key={i}
+              className="w-[300px] h-[400px] md:w-[450px] md:h-[300px] flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 group relative"
+            >
+
+              <img
+                src={item.url}
+                alt={item.label}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
+              />
+
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0">
+                <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.2em] mb-1">
+                  {item.tipo}
+                </span>
+                <span className="text-white font-black text-lg md:text-xl uppercase tracking-tighter whitespace-normal">
+                  {item.label}
+                </span>
+              </div>
+
+
+              <div className="absolute inset-0 border-2 border-blue-500/0 group-hover:border-blue-500/30 rounded-2xl transition-colors duration-500 pointer-events-none" />
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+
+
+function TechMarquee() {
+  const techs = [
+    { name: "JavaScript", icon: <FaJs className="text-[#F7DF1E]" /> },
+    { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
+    { name: "PHP", icon: <FaPhp className="text-[#777BB4]" /> },
+    { name: "React", icon: <FaReact className="text-[#61DAFB]" /> },
+    { name: "Next.js", icon: <SiNextdotjs className="text-white" /> },
+    { name: "Node.js", icon: <FaNodeJs className="text-[#339933]" /> },
+    { name: "Tailwind", icon: <SiTailwindcss className="text-[#06B6D4]" /> },
+    { name: "MySQL", icon: <SiMysql className="text-[#4479A1]" /> },
+    { name: "Docker", icon: <FaDocker className="text-[#2496ED]" /> },
+    { name: "Linux", icon: <SiLinux className="text-white" /> },
+  ];
 
   return (
 
@@ -374,14 +455,65 @@ export default function Home() {
         <section id="inicio" className="relative flex flex-col items-center justify-center min-h-screen px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="space-y-6 pt-20">
             <span className="px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest">{t.status}</span>
-            <h1 className="text-6xl md:text-9xl font-black tracking-tighter bg-gradient-to-b from-white via-white to-zinc-600 bg-clip-text text-transparent leading-none">{t.heroTitle}</h1>
+
+            <h1 className="text-6xl md:text-[7rem] font-black tracking-tighter bg-gradient-to-b from-white via-white to-zinc-600 bg-clip-text text-transparent leading-none">
+              {t.heroTitle}
+            </h1>
+
             <div className="text-2xl md:text-4xl text-blue-500 font-mono font-bold">
               <Typewriter key={lang} options={{ strings: t.heroSubtitle, autoStart: true, loop: true }} />
             </div>
-            <p className="max-w-xl mx-auto text-zinc-400 text-lg md:text-xl leading-relaxed">{t.heroDesc}</p>
+
+            <p className="max-w-xl mx-auto text-zinc-400 text-lg md:text-xl leading-relaxed">
+              {t.heroDesc}
+            </p>
+
             <div className="flex justify-center gap-4 pt-4">
-              <a href="#projetos" className="bg-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all">{t.btnProjects}</a>
-              <a href="#contato" className="border border-white/10 px-8 py-3 rounded-xl font-bold hover:bg-zinc-900 transition-all">{t.btnContact}</a>
+              <a href="#projetos" className="bg-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all">
+                {t.btnProjects}
+              </a>
+              <a href="#contato" className="border border-white/10 px-8 py-3 rounded-xl font-bold hover:bg-zinc-900 transition-all text-white">
+                {t.btnContact}
+              </a>
+            </div>
+
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 max-w-4xl mx-auto border-t border-white/5 mt-10">
+              <div className="flex flex-col items-center md:items-start">
+                <div className="flex items-center gap-3">
+                  <span className="text-4xl md:text-5xl font-black text-white">2</span>
+                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
+                    {t.stats.exp}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center md:items-start">
+                <div className="flex items-center gap-3">
+                  <span className="text-4xl md:text-5xl font-black text-white">10</span>
+                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
+                    {t.stats.projects}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center md:items-start">
+                <div className="flex items-center gap-3">
+                  <span className="text-4xl md:text-5xl font-black text-white">10</span>
+                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
+                    {t.stats.techs}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center md:items-start">
+                <div className="flex items-center gap-3">
+                  <span className="text-4xl md:text-5xl font-black text-white">271</span>
+                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
+                    {t.stats.commits}
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </section>
@@ -461,6 +593,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+
+
+        <GallerySection title={t.galleryTitle} />
 
 
 
