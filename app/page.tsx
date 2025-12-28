@@ -211,11 +211,11 @@ const translations = {
 
 
 const galleryImages = [
-  { url: "/galeria/Lumier.png", tipo: "Apresentação", label: "Projeto Lumier" },
-  { url: "/galeria/Lumier2.jpg", tipo: "Apresentação", label: "Projeto Lumier" },
-  { url: "/galeria/MusicHouse.jpg", tipo: "Apresentação", label: "Music House" },
-  { url: "/galeria/MusicHouse2.jpg", tipo: "Apresentação", label: "Grupo Music House" },
-  { url: "/galeria/FormaturaSenai.jpeg", tipo: "Formatura", label: "SENAI Armando de Arruda Pereira 2025" },
+  { url: "/Lumier.png", tipo: "Apresentação", label: "Projeto Lumier" },
+  { url: "/Lumier2.jpg", tipo: "Apresentação", label: "Projeto Lumier" },
+  { url: "/MusicHouse.jpg", tipo: "Apresentação", label: "Music House" },
+  { url: "/MusicHouse2.jpg", tipo: "Apresentação", label: "Grupo Music House" },
+  { url: "/FormaturaSenai.jpeg", tipo: "Formatura", label: "SENAI Armando de Arruda Pereira 2025" },
 ];
 
 function GallerySection({ title }: { title: string }) {
