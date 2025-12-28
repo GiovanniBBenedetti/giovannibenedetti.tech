@@ -1,19 +1,32 @@
 "use client";
 
 import { useState } from "react";
+
+//biblioteca das animações
 import { motion, AnimatePresence } from "framer-motion";
+
+//biblioteca da animação de escrita na pagina de iniocio
 import Typewriter from "typewriter-effect";
+
+//biblioteca de animação do carrossel da galeria
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+//biblioteca dos icone utilizados
 import {
-  FaGithub, FaExternalLinkAlt, FaGlobe, FaEnvelope, FaLinkedin,
-  FaPaperPlane, FaCode, FaShieldAlt, FaTerminal, FaDatabase,
-  FaServer, FaLock, FaSearch, FaMobileAlt, FaExclamationTriangle, FaTimes,
-  FaJs, FaReact, FaNodeJs, FaPython, FaDocker, FaPhp
+  FaGithub, FaExternalLinkAlt, FaGlobe, FaLinkedin,
+  FaPaperPlane, FaCode, FaShieldAlt,
+  FaServer, FaMobileAlt, FaExclamationTriangle, FaTimes,
+  FaJs, FaReact, FaNodeJs, FaDocker, FaPhp
 } from "react-icons/fa";
 import {
-  SiTypescript, SiNextdotjs, SiTailwindcss, SiPostgresql,
-  SiMetasploit, SiLinux, SiMysql
+  SiTypescript, SiNextdotjs, SiTailwindcss, SiLinux, SiMysql
 } from "react-icons/si";
 
+//criação das linguas pt/en/es
 const translations = {
   pt: {
     nav: ["Início", "Projetos", "Galeria", "Sobre", "Experiência", "Contato"],
@@ -175,7 +188,7 @@ const translations = {
     formBtn: "Enviar",
     footer: "Construido con Next.js & Tailwind.",
     modalTitle: "Enlace no disponible",
-    modalDesc: "¡Este proyecto aún está en fase de despliegue o el repositorio é privado por razones de seguridad!",
+    modalDesc: "¡Este projeto ainda está em fase de deploy ou o repositório é privado por questões de segurança!",
     expList: [
       {
         date: "2026 - 2027",
@@ -187,7 +200,7 @@ const translations = {
         date: "2024 - 2025",
         title: "Técnico en Desarrollo de Sistemas",
         company: "Escuela SENAI Armando de Arruda Pereira",
-        desc: "Formación técnica en lógica de programación, arquitectura de software y bases de datos."
+        desc: "Formación técnica en lógica de programação, arquitetura de software e bases de dados."
       }
     ],
     serviceList: [
@@ -210,7 +223,8 @@ const translations = {
 };
 
 
-const galleryImages = [
+//imagens da galeria puxando da pasta public
+const imagensGaleria = [
   { url: "/Lumier.png", tipo: "Apresentação", label: "Projeto Lumier" },
   { url: "/Lumier2.jpg", tipo: "Apresentação", label: "Projeto Lumier" },
   { url: "/MusicHouse.jpg", tipo: "Apresentação", label: "Music House" },
@@ -218,59 +232,86 @@ const galleryImages = [
   { url: "/FormaturaSenai.jpeg", tipo: "Formatura", label: "SENAI Armando de Arruda Pereira 2025" },
 ];
 
+
+//função da galeria junto com os carrosseis
 function GallerySection({ title }: { title: string }) {
   return (
-    <section id="galeria" className="py-24 border-t border-white/5 bg-zinc-950/20 overflow-hidden">
+    <section id="galeria" className="py-24 border-t border-white/5 bg-zinc-950/20">
       <div className="max-w-7xl mx-auto px-6 mb-12">
-        <h2 className="text-4xl font-black text-white uppercase tracking-tighter">
+        <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter">
           {title}
         </h2>
         <div className="w-20 h-1 bg-blue-600 mt-2"></div>
       </div>
 
-      <div className="relative flex">
-        <motion.div
-          animate={{ x: [0, -1200] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="flex gap-6 whitespace-nowrap"
+      <div className="px-6">
+        <Swiper
+          modules={[Autoplay, Navigation, Pagination]}
+          spaceBetween={30}
+          slidesPerView={1}
+          centeredSlides={true}
+          loop={true}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+          }}
+          pagination={{ clickable: true }}
+          navigation={true}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 2.5 },
+          }}
+          className="pb-14"
         >
+          {imagensGaleria.map((item, i) => (
+            <SwiperSlide key={i}>
+              <div className="relative h-[400px] w-full overflow-hidden rounded-3xl border border-white/10 group cursor-grab active:cursor-grabbing">
+                <img
+                  src={item.url}
+                  alt={item.label}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
 
-          {[...galleryImages, ...galleryImages, ...galleryImages].map((item, i) => (
-            <div
-              key={i}
-              className="w-[300px] h-[400px] md:w-[450px] md:h-[300px] flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 group relative"
-            >
-
-              <img
-                src={item.url}
-                alt={item.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
-              />
-
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0">
-                <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.2em] mb-1">
-                  {item.tipo}
-                </span>
-                <span className="text-white font-black text-lg md:text-xl uppercase tracking-tighter whitespace-normal">
-                  {item.label}
-                </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
+                  <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.3em] mb-2 font-bold">
+                    {item.tipo}
+                  </span>
+                  <h3 className="text-white text-2xl font-black uppercase tracking-tighter">
+                    {item.label}
+                  </h3>
+                </div>
               </div>
-
-
-              <div className="absolute inset-0 border-2 border-blue-500/0 group-hover:border-blue-500/30 rounded-2xl transition-colors duration-500 pointer-events-none" />
-            </div>
+            </SwiperSlide>
           ))}
-        </motion.div>
+        </Swiper>
       </div>
+
+
+{/* estilizacao do botao carrossel */}
+      <style jsx global>{`
+        .swiper-button-next, .swiper-button-prev {
+          color: #3b82f6 !important;
+          transform: scale(0.6);
+          background: rgba(0,0,0,0.5);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+        .swiper-pagination-bullet {
+          background: #3b82f6 !important;
+        }
+      `}</style>
     </section>
   );
 }
 
 
-
+//funcao para as tecnologia em que eu trabalho
 function TechMarquee() {
-  const techs = [
+
+  //icones das tecnologias
+  const tecnologias = [
     { name: "JavaScript", icon: <FaJs className="text-[#F7DF1E]" /> },
     { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
     { name: "PHP", icon: <FaPhp className="text-[#777BB4]" /> },
@@ -292,7 +333,7 @@ function TechMarquee() {
         transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
         className="flex whitespace-nowrap"
       >
-        {[...techs, ...techs].map((tech, i) => (
+        {[...tecnologias, ...tecnologias].map((tech, i) => (
           <div
             key={i}
             className="flex items-center gap-3 px-6 py-3 bg-zinc-900/50 border border-white/5 rounded-xl backdrop-blur-sm mr-8"
@@ -309,7 +350,9 @@ function TechMarquee() {
   );
 }
 
-const projectAssets = [
+
+
+const projetosiconesImagens = [
   { tags: ["PHP", "CSS", "BOOTSTRAP"], github: "https://github.com/GiovanniBBenedetti/SunsetLandscape", link: "", image: "/Sunset.png" },
   { tags: ["HTML", "CSS", "BOOTSTRAP"], github: "https://github.com/GiovanniBBenedetti/Cristallo", link: "https://giovannibbenedetti.github.io/Cristallo/", image: "/Cristallo.png" },
   { tags: ["HTML", "CSS", "JAVASCRIPT"], github: "https://github.com/GiovanniBBenedetti/SampaTicket", link: "https://giovannibbenedetti.github.io/SampaTicket/", image: "/Sampa.png" },
@@ -321,6 +364,8 @@ const projectAssets = [
 ];
 
 
+
+// Função para os cards do projeto
 function ProjectCard({ title, desc, asset, index, onAlert }: any) {
   const handleLinkClick = (e: React.MouseEvent, url: string) => {
     if (!url || url === "#" || url === "") {
@@ -364,6 +409,9 @@ function ProjectCard({ title, desc, asset, index, onAlert }: any) {
 }
 
 
+
+
+
 export default function Home() {
   const [lang, setLang] = useState<"pt" | "en" | "es">("pt");
   const [showLangMenu, setShowLangMenu] = useState(false);
@@ -374,6 +422,7 @@ export default function Home() {
   return (
     <div className="bg-black text-zinc-100 min-h-screen font-sans selection:bg-blue-500/30 overflow-x-hidden">
 
+    {/* Caso não tenha um link para abrir o projeto */}
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
@@ -411,30 +460,33 @@ export default function Home() {
       </AnimatePresence>
 
 
+        {/* fundo Personalizado (alterar futuramente) :)*/}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full opacity-50" />
       </div>
 
+
+      {/* Cabeçalho */}
       <header className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl">
         <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="text-2xl font-black tracking-tighter">G<span className="text-blue-500">B</span></div>
-    <div className="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
-  {t.nav.map((item, idx) => {
+          <div className="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
+            {t.nav.map((item, idx) => {
 
-    const targetIds = ["inicio", "projetos","galeria", "sobre", "experiencia", "contato"];
-    
-    return (
-      <a
-        key={idx}
-        href={`#${targetIds[idx]}`} 
-        className="hover:text-blue-400 transition-colors cursor-pointer"
-      >
-        {item}
-      </a>
-    );
-  })}
-</div>
+              const targetIds = ["inicio", "projetos", "galeria", "sobre", "experiencia", "contato"];
+
+              return (
+                <a
+                  key={idx}
+                  href={`#${targetIds[idx]}`}
+                  className="hover:text-blue-400 transition-colors cursor-pointer"
+                >
+                  {item}
+                </a>
+              );
+            })}
+          </div>
           <div className="flex items-center gap-6">
             <div className="relative">
               <button onClick={() => setShowLangMenu(!showLangMenu)} className="flex items-center gap-2 bg-zinc-900 border border-white/10 px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-zinc-800 transition-colors">
@@ -457,22 +509,20 @@ export default function Home() {
       </header>
 
       <main className="relative z-10">
+
+        {/* Inicio(Apresentação) */}
         <section id="inicio" className="relative flex flex-col items-center justify-center min-h-screen px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="space-y-6 pt-20">
             <span className="px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest">{t.status}</span>
-
             <h1 className="text-6xl md:text-[7rem] font-black tracking-tighter bg-gradient-to-b from-white via-white to-zinc-600 bg-clip-text text-transparent leading-none">
               {t.heroTitle}
             </h1>
-
             <div className="text-2xl md:text-4xl text-blue-500 font-mono font-bold">
               <Typewriter key={lang} options={{ strings: t.heroSubtitle, autoStart: true, loop: true }} />
             </div>
-
             <p className="max-w-xl mx-auto text-zinc-400 text-lg md:text-xl leading-relaxed">
               {t.heroDesc}
             </p>
-
             <div className="flex justify-center gap-4 pt-4">
               <a href="#projetos" className="bg-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all">
                 {t.btnProjects}
@@ -481,8 +531,6 @@ export default function Home() {
                 {t.btnContact}
               </a>
             </div>
-
-
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 max-w-4xl mx-auto border-t border-white/5 mt-10">
               <div className="flex flex-col items-center md:items-start">
                 <div className="flex items-center gap-3">
@@ -492,7 +540,6 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-
               <div className="flex flex-col items-center md:items-start">
                 <div className="flex items-center gap-3">
                   <span className="text-4xl md:text-5xl font-black text-white">10</span>
@@ -501,7 +548,6 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-
               <div className="flex flex-col items-center md:items-start">
                 <div className="flex items-center gap-3">
                   <span className="text-4xl md:text-5xl font-black text-white">10</span>
@@ -510,7 +556,6 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-
               <div className="flex flex-col items-center md:items-start">
                 <div className="flex items-center gap-3">
                   <span className="text-4xl md:text-5xl font-black text-white">271</span>
@@ -524,49 +569,42 @@ export default function Home() {
         </section>
 
 
-
+        {/* Sobre Mim */}
         <section
           id="sobre"
           className="relative py-24 border-t border-white/5 overflow-hidden"
         >
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.1] animate-pulse" />
-
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
             <div className="space-y-6">
               <h2 className="text-4xl md:text-6xl font-black text-white">
                 {t.aboutTitle}{" "}
                 <span className="text-blue-500">{t.aboutHighlight}</span>
               </h2>
-
               <p className="text-zinc-400 text-lg leading-relaxed italic">
                 "{t.aboutText}"
               </p>
             </div>
-
             <div className="grid grid-cols-2 gap-4">
               <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
                 <FaShieldAlt className="text-blue-500 mb-2 text-2xl" />
                 <h4 className="font-bold text-white">Security First</h4>
                 <p className="text-xs text-zinc-500">Pentest & Defesa</p>
               </div>
-
               <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
                 <FaCode className="text-blue-500 mb-2 text-2xl" />
                 <h4 className="font-bold text-white">Full Stack</h4>
                 <p className="text-xs text-zinc-500">React & Next.js</p>
               </div>
             </div>
-
-
             <div className="col-span-full">
               <TechMarquee />
             </div>
-
           </div>
         </section>
 
 
+        {/* Projetos */}
         <section id="projetos" className="py-24 bg-zinc-950/50 border-y border-white/5 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-4xl mb-16 text-center md:text-5xl font-black tracking-tight text-white">
@@ -576,7 +614,7 @@ export default function Home() {
               {t.projectList.map((proj, i) => (
                 <ProjectCard
                   key={i} title={proj.title} desc={proj.desc}
-                  asset={projectAssets[i]} index={i}
+                  asset={projetosiconesImagens[i]} index={i}
                   onAlert={() => setIsModalOpen(true)}
                 />
               ))}
@@ -600,11 +638,13 @@ export default function Home() {
         </section>
 
 
+        {/* Galeria de fotos */}
+        <GallerySection title={t.galleryTitle} />
 
-        <GallerySection  title={t.galleryTitle} />
 
 
 
+        {/* esperiencia */}
         <section id="experiencia" className="py-24 bg-zinc-950/30 border-t border-white/5">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-4xl md:text-5xl font-black text-center mb-20 text-white">{t.expTitle} <span className="text-blue-500">{t.expHighlight}</span></h2>
@@ -622,6 +662,11 @@ export default function Home() {
           </div>
         </section>
 
+
+
+
+
+        {/* Contato */}
         <section id="contato" className="py-24 border-t border-white/5">
           <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-8 text-center lg:text-left">
