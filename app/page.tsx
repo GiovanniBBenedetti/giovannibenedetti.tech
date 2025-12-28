@@ -220,7 +220,7 @@ const galleryImages = [
 
 function GallerySection({ title }: { title: string }) {
   return (
-    <section className="py-24 border-t border-white/5 bg-zinc-950/20 overflow-hidden">
+    <section id="galeria" className="py-24 border-t border-white/5 bg-zinc-950/20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-12">
         <h2 className="text-4xl font-black text-white uppercase tracking-tighter">
           {title}
@@ -314,7 +314,7 @@ const projectAssets = [
   { tags: ["HTML", "CSS", "BOOTSTRAP"], github: "https://github.com/GiovanniBBenedetti/Cristallo", link: "https://giovannibbenedetti.github.io/Cristallo/", image: "/Cristallo.png" },
   { tags: ["HTML", "CSS", "JAVASCRIPT"], github: "https://github.com/GiovanniBBenedetti/SampaTicket", link: "https://giovannibbenedetti.github.io/SampaTicket/", image: "/Sampa.png" },
   { tags: ["HTML", "CSS", "JAVASCRIPT"], github: "https://github.com/GiovanniBBenedetti/Blockbuster-LLC", link: "https://giovannibbenedetti.github.io/Blockbuster-LLC/", image: "/blockbuster.png" },
-  { tags: ["NODE JS", "NEXT JS", "AZURE", "MYSQL",], github: "https://github.com/GiovanniBBenedetti/Lumier.git", link: "", image: "/Lumier.png" },
+  { tags: ["NODE JS", "NEXT JS", "AZURE", "MYSQL",], github: "https://github.com/GiovanniBBenedetti/Lumier.git", link: "", image: "/LumierLogo.png" },
   { tags: ["NEXT JS", "API CIFRACLUB"], github: "https://github.com/GiovanniBBenedetti/BandMatch.git", link: "", image: "/BandMatch.png" },
   { tags: ["NEXTJS", "NODE JS", "MYSQL", "NODEMAILER", "JWT", "EXPRESS", "TAILWIND CSS"], github: "https://github.com/pachec0js/MusicHouse", link: "", image: "/MusicHouse.png" },
   { tags: ["NEXTJS", "NODE JS", "MYSQL", "JWT", "EXPRESS", "CSS", "PASSPORTJS"], github: "https://github.com/GiovanniBBenedetti/projetoZelosSenai", link: "", image: "/Zelos.png" },
@@ -419,17 +419,22 @@ export default function Home() {
       <header className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl">
         <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="text-2xl font-black tracking-tighter">G<span className="text-blue-500">B</span></div>
-          <div className="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
-            {t.nav.map((item, idx) => (
-              <a
-                key={idx}
-                href={`#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`}
-                className="hover:text-blue-400 transition-colors"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
+    <div className="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
+  {t.nav.map((item, idx) => {
+
+    const targetIds = ["inicio", "projetos","galeria", "sobre", "experiencia", "contato"];
+    
+    return (
+      <a
+        key={idx}
+        href={`#${targetIds[idx]}`} 
+        className="hover:text-blue-400 transition-colors cursor-pointer"
+      >
+        {item}
+      </a>
+    );
+  })}
+</div>
           <div className="flex items-center gap-6">
             <div className="relative">
               <button onClick={() => setShowLangMenu(!showLangMenu)} className="flex items-center gap-2 bg-zinc-900 border border-white/10 px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-zinc-800 transition-colors">
@@ -596,7 +601,7 @@ export default function Home() {
 
 
 
-        <GallerySection title={t.galleryTitle} />
+        <GallerySection  title={t.galleryTitle} />
 
 
 
