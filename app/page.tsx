@@ -6,8 +6,13 @@ import Typewriter from "typewriter-effect";
 import {
   FaGithub, FaExternalLinkAlt, FaGlobe, FaEnvelope, FaLinkedin,
   FaPaperPlane, FaCode, FaShieldAlt, FaTerminal, FaDatabase,
-  FaServer, FaLock, FaSearch, FaMobileAlt
+  FaServer, FaLock, FaSearch, FaMobileAlt, FaExclamationTriangle, FaTimes,
+  FaJs, FaReact, FaNodeJs, FaPython, FaDocker, FaPhp 
 } from "react-icons/fa";
+import {
+  SiTypescript, SiNextdotjs, SiTailwindcss, SiPostgresql,
+  SiMetasploit, SiLinux, SiMysql
+} from "react-icons/si";
 
 const translations = {
   pt: {
@@ -35,6 +40,8 @@ const translations = {
     formMsg: "Sua mensagem",
     formBtn: "Enviar Mensagem",
     footer: "Construído com Next.js & Tailwind.",
+    modalTitle: "Link Indisponível",
+    modalDesc: "Este projeto ainda está em fase de deploy ou o repositório é privado por questões de segurança. Entre em contato para mais detalhes!",
     expList: [
       {
         date: "2026 - 2027",
@@ -55,12 +62,15 @@ const translations = {
       { icon: <FaMobileAlt />, title: "Mobile", desc: "Apps híbridos com React Native." }
     ],
     projectList: [
-      { title: "Cyber Shield AI", desc: "Sistema de detecção de intrusão usando IA para identificar padrões maliciosos." },
-      { title: "E-Commerce Nexus", desc: "Plataforma full stack com pagamentos integrados e dashboard em tempo real." },
-      { title: "Pentest Toolkit", desc: "Suíte de ferramentas automatizadas para análise de vulnerabilidades web." },
-      { title: "Secure Vault", desc: "Gerenciador de senhas criptografado end-to-end com 2FA." },
-      { title: "Analytic Dashboard", desc: "Painel interativo para visualização de logs de segurança e tráfego." }
-    ]
+      { title: "Sunset Landscape", desc: "Sistema hoteleiro completo com painel administrativo e interface de cliente para reservas." },
+      { title: "Cristallo", desc: "E-commerce de luxo focado em pulseiras femininas com design elegante e alta performance." },
+      { title: "SampaTicket", desc: "Plataforma de ingressos para a Grande SP com listagem categorizada e checkout simulado." },
+      { title: "Blockbuster Revive", desc: "Interface nostálgica da antiga locadora com catálogo de filmes e design retrô." },
+      { title: "Lumier", desc: "Sistema de gestão de blogs escolares para publicação de conteúdos educativos." },
+      { title: "BandMatch", desc: "Rede social para músicos encontrarem integrantes e pesquisarem cifras de músicas." },
+      { title: "MusicHouse", desc: "Sistema robusto de gerenciamento de estoque e controle de franquias para lojas de música." },
+      { title: "Zelos", desc: "Sistema de gerenciamento de chamados desenvolvido para o SENAI. Otimiza o suporte interno e a manutenção da instituição." }
+    ],
   },
   en: {
     nav: ["Home", "Projects", "About", "Experience", "Contact"],
@@ -87,6 +97,8 @@ const translations = {
     formMsg: "Your message",
     formBtn: "Send Message",
     footer: "Built with Next.js & Tailwind.",
+    modalTitle: "Link Unavailable",
+    modalDesc: "This project is still in the deployment phase or the repository is private for security reasons. Contact me for more details!",
     expList: [
       {
         date: "2026 - 2027",
@@ -107,12 +119,15 @@ const translations = {
       { icon: <FaMobileAlt />, title: "Mobile", desc: "Hybrid apps with React Native." }
     ],
     projectList: [
-      { title: "Cyber Shield AI", desc: "AI-driven intrusion detection system to identify malicious patterns." },
-      { title: "E-Commerce Nexus", desc: "Full stack platform with integrated payments and real-time dashboard." },
-      { title: "Pentest Toolkit", desc: "Automated toolkit for web vulnerability analysis and reconnaissance." },
-      { title: "Secure Vault", desc: "End-to-end encrypted password manager with 2FA support." },
-      { title: "Analytic Dashboard", desc: "Interactive dashboard for security logs and network traffic visualization." }
-    ]
+      { title: "Sunset Landscape", desc: "Complete hotel system with admin panel and client booking interface." },
+      { title: "Cristallo", desc: "Luxury e-commerce for women's bracelets with elegant design and high performance." },
+      { title: "SampaTicket", desc: "Ticket platform for Greater SP featuring categorized listings and checkout." },
+      { title: "Blockbuster Revive", desc: "Nostalgic video store interface with movie catalog and retro design." },
+      { title: "Lumier", desc: "School blog management system for educational content publishing." },
+      { title: "BandMatch", desc: "Social network for musicians to find members and search for song chords." },
+      { title: "MusicHouse", desc: "Robust inventory management and franchise control system for musical instrument stores." },
+      { title: "Zelos", desc: "Ticketing management system developed for SENAI. Optimizes internal support and institutional maintenance." }
+    ],
   },
   es: {
     nav: ["Inicio", "Proyectos", "Sobre", "Experiencia", "Contacto"],
@@ -139,6 +154,8 @@ const translations = {
     formMsg: "Mensaje",
     formBtn: "Enviar",
     footer: "Construido con Next.js & Tailwind.",
+    modalTitle: "Enlace no disponible",
+    modalDesc: "¡Este proyecto aún está en fase de despliegue o el repositorio é privado por razones de seguridad!",
     expList: [
       {
         date: "2026 - 2027",
@@ -159,24 +176,78 @@ const translations = {
       { icon: <FaMobileAlt />, title: "Mobile", desc: "Apps con React Native." }
     ],
     projectList: [
-      { title: "Cyber Shield AI", desc: "Sistema de detección de intrusiones mediante IA." },
-      { title: "E-Commerce Nexus", desc: "Plataforma full stack con pagos integrados." },
-      { title: "Pentest Toolkit", desc: "Herramientas para análisis de vulnerabilidades." },
-      { title: "Secure Vault", desc: "Gestor de contraseñas cifrado." },
-      { title: "Analytic Dashboard", desc: "Panel interactivo para registros de seguridad." }
-    ]
+      { title: "Sunset Landscape", desc: "Sistema hotelero completo con panel administrativo e interfaz de cliente." },
+      { title: "Cristallo", desc: "E-commerce de lujo para pulseras con diseño elegante y alto rendimiento." },
+      { title: "SampaTicket", desc: "Plataforma de entradas para el Gran SP con listado categorizado." },
+      { title: "Blockbuster Revive", desc: "Interfaz nostálgica de videotienda con catálogo de películas." },
+      { title: "Lumier", desc: "Sistema de gestión de blogs escolares para contenido educativo." },
+      { title: "BandMatch", desc: "Red social para músicos y búsqueda de acordes integrada." },
+      { title: "MusicHouse", desc: "Sistema robusto de gestión de inventario y control de franquicias para tiendas de música." },
+      { title: "Zelos", desc: "Sistema de gestión de tickets desarrollado para el SENAI. Optimiza el soporte interno y el mantenimiento." }
+    ],
   }
 };
 
-const projectAssets = [
-  { tags: ["Python", "TensorFlow"], github: "#", link: "#", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" },
-  { tags: ["Next.js", "Stripe"], github: "#", link: "#", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800" },
-  { tags: ["Go", "Docker"], github: "#", link: "#", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800" },
-  { tags: ["React Native", "AES"], github: "#", link: "#", image: "https://images.unsplash.com/photo-1633265486064-086b219458ec?q=80&w=800" },
-  { tags: ["TS", "Recharts"], github: "#", link: "#", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800" },
+function TechMarquee() {
+const techs = [
+  { name: "JavaScript", icon: <FaJs className="text-[#F7DF1E]" /> },
+  { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
+  { name: "PHP", icon: <FaPhp className="text-[#777BB4]" /> },
+  { name: "React", icon: <FaReact className="text-[#61DAFB]" /> },
+  { name: "Next.js", icon: <SiNextdotjs className="text-white" /> },
+  { name: "Node.js", icon: <FaNodeJs className="text-[#339933]" /> },
+  { name: "Tailwind", icon: <SiTailwindcss className="text-[#06B6D4]" /> },
+  { name: "MySQL", icon: <SiMysql className="text-[#4479A1]" /> },
+  { name: "Docker", icon: <FaDocker className="text-[#2496ED]" /> },
+  { name: "Linux", icon: <SiLinux className="text-white" /> },
 ];
 
-function ProjectCard({ title, desc, asset, index }: any) {
+  return (
+
+    <div className="relative overflow-hidden py-10">
+
+      <motion.div
+        animate={{ x: [0, -1800] }}
+        transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+        className="flex whitespace-nowrap"
+      >
+        {[...techs, ...techs].map((tech, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-3 px-6 py-3 bg-zinc-900/50 border border-white/5 rounded-xl backdrop-blur-sm mr-8"
+          >
+            <span className="text-2xl">{tech.icon}</span>
+            <span className="text-zinc-200 font-bold text-sm uppercase tracking-widest">
+              {tech.name}
+            </span>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+
+  );
+}
+
+const projectAssets = [
+  { tags: ["PHP", "CSS", "BOOTSTRAP"], github: "https://github.com/GiovanniBBenedetti/SunsetLandscape", link: "", image: "/Sunset.png" },
+  { tags: ["HTML", "CSS", "BOOTSTRAP"], github: "https://github.com/GiovanniBBenedetti/Cristallo", link: "https://giovannibbenedetti.github.io/Cristallo/", image: "/Cristallo.png" },
+  { tags: ["HTML", "CSS", "JAVASCRIPT"], github: "https://github.com/GiovanniBBenedetti/SampaTicket", link: "https://giovannibbenedetti.github.io/SampaTicket/", image: "/Sampa.png" },
+  { tags: ["HTML", "CSS", "JAVASCRIPT"], github: "https://github.com/GiovanniBBenedetti/Blockbuster-LLC", link: "https://giovannibbenedetti.github.io/Blockbuster-LLC/", image: "/blockbuster.png" },
+  { tags: ["NODE JS", "NEXT JS", "AZURE", "MYSQL",], github: "https://github.com/GiovanniBBenedetti/Lumier.git", link: "", image: "/Lumier.png" },
+  { tags: ["NEXT JS", "API CIFRACLUB"], github: "https://github.com/GiovanniBBenedetti/BandMatch.git", link: "", image: "/BandMatch.png" },
+  { tags: ["NEXTJS", "NODE JS", "MYSQL", "NODEMAILER", "JWT", "EXPRESS", "TAILWIND CSS"], github: "https://github.com/pachec0js/MusicHouse", link: "", image: "/MusicHouse.png" },
+  { tags: ["NEXTJS", "NODE JS", "MYSQL", "JWT", "EXPRESS", "CSS", "PASSPORTJS"], github: "https://github.com/GiovanniBBenedetti/projetoZelosSenai", link: "", image: "/Zelos.png" },
+];
+
+
+function ProjectCard({ title, desc, asset, index, onAlert }: any) {
+  const handleLinkClick = (e: React.MouseEvent, url: string) => {
+    if (!url || url === "#" || url === "") {
+      e.preventDefault();
+      onAlert();
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -186,20 +257,24 @@ function ProjectCard({ title, desc, asset, index }: any) {
       className="group bg-zinc-900/40 border border-white/5 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 backdrop-blur-sm"
     >
       <div className="h-44 overflow-hidden">
-        <img src={asset.image} alt={title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
+        <img
+          src={asset.image}
+          alt={title}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+        />
       </div>
       <div className="p-6 text-left">
         <div className="flex justify-between items-center mb-2">
           <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{title}</h3>
           <div className="flex gap-3 text-zinc-400">
-            <a href={asset.github} className="hover:text-white"><FaGithub size={18} /></a>
-            <a href={asset.link} className="hover:text-white"><FaExternalLinkAlt size={16} /></a>
+            <a href={asset.github} onClick={(e) => handleLinkClick(e, asset.github)} target="_blank" rel="noopener noreferrer" className="hover:text-white"><FaGithub size={18} /></a>
+            <a href={asset.link} onClick={(e) => handleLinkClick(e, asset.link)} target="_blank" rel="noopener noreferrer" className="hover:text-white"><FaExternalLinkAlt size={16} /></a>
           </div>
         </div>
-        <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{desc}</p>
-        <div className="flex gap-2">
+        <p className="text-zinc-400 text-sm mb-4">{desc}</p>
+        <div className="flex flex-wrap gap-x-2 gap-y-2">
           {asset.tags.map((tag: string) => (
-            <span key={tag} className="text-[10px] font-bold uppercase px-2 py-0.5 bg-zinc-800 text-zinc-400 rounded border border-white/5">{tag}</span>
+            <span key={tag} className="text-[10px] font-bold uppercase px-2 py-0.5 bg-zinc-800 text-zinc-400 rounded border border-white/5 whitespace-nowrap">{tag}</span>
           ))}
         </div>
       </div>
@@ -207,15 +282,54 @@ function ProjectCard({ title, desc, asset, index }: any) {
   );
 }
 
+
 export default function Home() {
   const [lang, setLang] = useState<"pt" | "en" | "es">("pt");
   const [showLangMenu, setShowLangMenu] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const t = translations[lang];
 
   return (
     <div className="bg-black text-zinc-100 min-h-screen font-sans selection:bg-blue-500/30 overflow-x-hidden">
 
-      {/* FUNDO GLOBAL */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-md bg-zinc-900 border border-white/10 p-8 rounded-3xl shadow-2xl text-center"
+            >
+              <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FaExclamationTriangle className="text-blue-500 text-2xl" />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">{t.modalTitle}</h3>
+              <p className="text-zinc-400 mb-8 leading-relaxed">{t.modalDesc}</p>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all"
+              >
+                Entendido
+              </button>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
+              >
+                <FaTimes size={20} />
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full opacity-50" />
@@ -226,7 +340,13 @@ export default function Home() {
           <div className="text-2xl font-black tracking-tighter">G<span className="text-blue-500">B</span></div>
           <div className="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
             {t.nav.map((item, idx) => (
-              <a key={idx} href={`#${item.toLowerCase()}`} className="hover:text-blue-400 transition-colors">{item}</a>
+              <a
+                key={idx}
+                href={`#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`}
+                className="hover:text-blue-400 transition-colors"
+              >
+                {item}
+              </a>
             ))}
           </div>
           <div className="flex items-center gap-6">
@@ -251,8 +371,7 @@ export default function Home() {
       </header>
 
       <main className="relative z-10">
-        {/* HERO */}
-        <section className="relative flex flex-col items-center justify-center min-h-screen px-4 text-center">
+        <section id="inicio" className="relative flex flex-col items-center justify-center min-h-screen px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="space-y-6 pt-20">
             <span className="px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest">{t.status}</span>
             <h1 className="text-6xl md:text-9xl font-black tracking-tighter bg-gradient-to-b from-white via-white to-zinc-600 bg-clip-text text-transparent leading-none">{t.heroTitle}</h1>
@@ -267,7 +386,50 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* PROJETOS */}
+
+
+        <section
+          id="sobre"
+          className="relative py-24 border-t border-white/5 overflow-hidden"
+        >
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.1] animate-pulse" />
+
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-6xl font-black text-white">
+                {t.aboutTitle}{" "}
+                <span className="text-blue-500">{t.aboutHighlight}</span>
+              </h2>
+
+              <p className="text-zinc-400 text-lg leading-relaxed italic">
+                "{t.aboutText}"
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
+                <FaShieldAlt className="text-blue-500 mb-2 text-2xl" />
+                <h4 className="font-bold text-white">Security First</h4>
+                <p className="text-xs text-zinc-500">Pentest & Defesa</p>
+              </div>
+
+              <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
+                <FaCode className="text-blue-500 mb-2 text-2xl" />
+                <h4 className="font-bold text-white">Full Stack</h4>
+                <p className="text-xs text-zinc-500">React & Next.js</p>
+              </div>
+            </div>
+
+
+            <div className="col-span-full">
+              <TechMarquee />
+            </div>
+
+          </div>
+        </section>
+
+
         <section id="projetos" className="py-24 bg-zinc-950/50 border-y border-white/5 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-4xl mb-16 text-center md:text-5xl font-black tracking-tight text-white">
@@ -275,23 +437,22 @@ export default function Home() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {t.projectList.map((proj, i) => (
-                <ProjectCard key={i} title={proj.title} desc={proj.desc} asset={projectAssets[i]} index={i} />
+                <ProjectCard
+                  key={i} title={proj.title} desc={proj.desc}
+                  asset={projectAssets[i]} index={i}
+                  onAlert={() => setIsModalOpen(true)}
+                />
               ))}
             </div>
           </div>
         </section>
 
-        {/* ESPECIALIDADES (NEW) */}
         <section className="py-24">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-4xl text-center font-black mb-16 text-white uppercase tracking-tighter">{t.servicesTitle}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {t.serviceList.map((service, idx) => (
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  key={idx}
-                  className="p-8 bg-zinc-900/30 border border-white/5 rounded-3xl text-center space-y-4 hover:border-blue-500/30 transition-all"
-                >
+                <motion.div whileHover={{ y: -5 }} key={idx} className="p-8 bg-zinc-900/30 border border-white/5 rounded-3xl text-center space-y-4 hover:border-blue-500/30 transition-all">
                   <div className="text-3xl text-blue-500 flex justify-center">{service.icon}</div>
                   <h3 className="font-bold text-white text-xl">{service.title}</h3>
                   <p className="text-zinc-500 text-sm">{service.desc}</p>
@@ -301,49 +462,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SOBRE MIM */}
-        <section id="sobre" className="relative py-24 border-t border-white/5 overflow-hidden">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.1] animate-pulse" />
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl md:text-6xl font-black text-white">{t.aboutTitle} <span className="text-blue-500">{t.aboutHighlight}</span></h2>
-              <p className="text-zinc-400 text-lg leading-relaxed italic">"{t.aboutText}"</p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
-                  <FaShieldAlt className="text-blue-500 mb-2 text-2xl" />
-                  <h4 className="font-bold">Security First</h4>
-                  <p className="text-xs text-zinc-500">Pentest & Defesa</p>
-                </div>
-                <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
-                  <FaCode className="text-blue-500 mb-2 text-2xl" />
-                  <h4 className="font-bold">Full Stack</h4>
-                  <p className="text-xs text-zinc-500">React & Next.js</p>
-                </div>
-              </div>
-            </div>
-            <div className="p-8 bg-zinc-900 border border-white/10 rounded-3xl space-y-6 shadow-2xl">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2"><FaTerminal className="text-blue-500" /> {t.skillsTitle}</h3>
-              <div className="flex flex-wrap gap-2">
-                {["TypeScript", "Python", "Go", "Docker", "PostgreSQL", "Linux", "Metasploit"].map(s => (
-                  <span key={s} className="px-3 py-1 bg-zinc-800 text-zinc-400 rounded-lg text-sm border border-white/5">{s}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* EXPERIÊNCIA (NEW) */}
-        <section id="experiência" className="py-24 bg-zinc-950/30 border-t border-white/5">
+
+        <section id="experiencia" className="py-24 bg-zinc-950/30 border-t border-white/5">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-4xl md:text-5xl font-black text-center mb-20 text-white">{t.expTitle} <span className="text-blue-500">{t.expHighlight}</span></h2>
             <div className="space-y-12">
               {t.expList.map((item, idx) => (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  key={idx}
-                  className="relative pl-8 border-l-2 border-blue-500/20"
-                >
+                <motion.div whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: -20 }} key={idx} className="relative pl-8 border-l-2 border-blue-500/20">
                   <div className="absolute w-4 h-4 bg-blue-600 rounded-full -left-[9px] top-0 shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
                   <span className="text-blue-500 font-mono text-sm uppercase">{item.date}</span>
                   <h3 className="text-2xl font-bold text-white mt-2">{item.title}</h3>
@@ -355,15 +481,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CONTATO */}
         <section id="contato" className="py-24 border-t border-white/5">
           <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="space-y-8 text-center lg:text-left">
               <h2 className="text-5xl md:text-7xl font-black text-white">{t.contactTitle} <span className="text-blue-500">{t.contactHighlight}</span></h2>
               <p className="text-zinc-400 text-lg">{t.contactDesc}</p>
               <div className="flex justify-center lg:justify-start gap-4">
-                <a href="https://www.linkedin.com/in/giovanni-buscarino-benedetti-7a92a9326/" target="blank" className="p-4 bg-zinc-900 rounded-full border border-white/5 hover:text-blue-500 transition-colors"><FaLinkedin size={20} /></a>
-                <a href="https://github.com/GiovanniBBenedetti" target="blank" className="p-4 bg-zinc-900 rounded-full border border-white/5 hover:text-blue-500 transition-colors"><FaGithub size={20} /></a>
+                <a href="https://www.linkedin.com/in/giovanni-buscarino-benedetti-7a92a9326/" target="_blank" className="p-4 bg-zinc-900 rounded-full border border-white/5 hover:text-blue-500 transition-colors"><FaLinkedin size={20} /></a>
+                <a href="https://github.com/GiovanniBBenedetti" target="_blank" className="p-4 bg-zinc-900 rounded-full border border-white/5 hover:text-blue-500 transition-colors"><FaGithub size={20} /></a>
               </div>
             </div>
             <form className="bg-zinc-900/50 p-8 rounded-3xl border border-white/5 backdrop-blur-xl space-y-4 shadow-2xl">
