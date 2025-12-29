@@ -20,7 +20,7 @@ import {
   FaGithub, FaExternalLinkAlt, FaGlobe, FaLinkedin,
   FaPaperPlane, FaCode, FaShieldAlt,
   FaServer, FaMobileAlt, FaExclamationTriangle, FaTimes,
-  FaJs, FaReact, FaNodeJs, FaDocker, FaPhp
+  FaJs, FaReact, FaNodeJs, FaDocker, FaPhp, FaGlobeAmericas
 } from "react-icons/fa";
 import {
   SiTypescript, SiNextdotjs, SiTailwindcss, SiLinux, SiMysql
@@ -46,7 +46,7 @@ const translations = {
     sectionHighlight: "Destaques",
     aboutTitle: "Sobre",
     aboutHighlight: "Mim",
-    aboutText: "Sou um desenvolvedor apaixonado por construir ferramentas que resolvem problemas reais. Atualmente, foco meus estudos em Cibersegurança, unindo o desenvolvimento de software com práticas de defesa e análise de vulnerabilidades.",
+    aboutText: "Meu nome é Giovanni Buscarino Benedetti, tenho 18 anos e sou um entusiasta de tecnologia dedicado atualmente aos estudos de Desenvolvimento de Sistemas e Cibersegurança. Tenho uma base sólida em programação, hardware e proteção de dados, áreas que exploro para criar soluções eficientes, inovadoras e seguras. Além da parte técnica, possuo competências em design digital, incluindo edição de vídeo, imagem e desenvolvimento de games. Essa combinação entre lógica, segurança e criatividade me permite ter uma visão 360º de projetos digitais, unindo funcionalidade e proteção ao usuário.",
     skillsTitle: "Tecnologias & Skills",
     expTitle: "Minha",
     expHighlight: "Jornada",
@@ -77,8 +77,9 @@ const translations = {
     ],
     serviceList: [
       { icon: <FaCode />, title: "Web Dev", desc: "Aplicações performáticas com Next.js." },
-      { icon: <FaServer />, title: "Backend", desc: "APIs escaláveis em Node.js." },
-      { icon: <FaMobileAlt />, title: "Mobile", desc: "Apps híbridos com React Native." }
+      { icon: <FaServer />, title: "Backend", desc: "APIs escaláveis em Node.js e PHP." },
+      { icon: <FaMobileAlt />, title: "Mobile", desc: "Apps híbridos com React Native." },
+      { icon: <SiLinux />, title: "Linux & DevOps", desc: "Gestão de servidores e containers Docker." }
     ],
     projectList: [
       { title: "Sunset Landscape", desc: "Sistema hoteleiro completo com painel administrativo e interface de cliente para reservas." },
@@ -110,7 +111,7 @@ const translations = {
     sectionHighlight: "Projects",
     aboutTitle: "About",
     aboutHighlight: "Me",
-    aboutText: "I am a developer passionate about building tools that solve real problems. Currently, I focus my studies on Cybersecurity, merging software development with defense practices and vulnerability analysis.",
+    aboutText: "My name is Giovanni Buscarino Benedetti, I am 17 years old and a technology enthusiast currently dedicated to studying Systems Development and Cybersecurity. I have a solid foundation in programming, hardware, and data protection, fields I am exploring to create efficient, innovative, and secure solutions. Beyond the technical side, I have skills in digital design, including video editing, image manipulation, and game development. This combination of logic, security, and creativity allows me to have a 360º view of digital projects, merging functionality with user protection.",
     skillsTitle: "Tech Stack & Skills",
     expTitle: "My",
     expHighlight: "Journey",
@@ -141,8 +142,9 @@ const translations = {
     ],
     serviceList: [
       { icon: <FaCode />, title: "Web Dev", desc: "High-performance apps with Next.js." },
-      { icon: <FaServer />, title: "Backend", desc: "Scalable APIs in Node.js." },
-      { icon: <FaMobileAlt />, title: "Mobile", desc: "Hybrid apps with React Native." }
+      { icon: <FaServer />, title: "Backend", desc: "Scalable APIs in Node.js and PHP." },
+      { icon: <FaMobileAlt />, title: "Mobile", desc: "Hybrid apps with React Native." },
+      { icon: <SiLinux />, title: "Linux & DevOps", desc: "Server management and Docker containers." }
     ],
     projectList: [
       { title: "Sunset Landscape", desc: "Complete hotel system with admin panel and client booking interface." },
@@ -174,7 +176,7 @@ const translations = {
     sectionHighlight: "Destacados",
     aboutTitle: "Sobre",
     aboutHighlight: "Mí",
-    aboutText: "Soy un desarrollador apasionado por crear herramientas que resuelven problemas reales. Actualmente centro mis estudios en Ciberseguridad.",
+    aboutText: "Mi nombre es Giovanni Buscarino Benedetti, tengo 17 años y soy un entusiasta de la tecnología dedicado actualmente a los estudios de Desarrollo de Sistemas y Ciberseguridad. Cuento con una base sólida en programación, hardware y protección de datos, áreas que exploro con el objetivo de crear soluciones eficientes, innovadoras y seguras. Además de la parte técnica, poseo competencias en diseño digital, incluyendo edición de video, imagen y desarrollo de videojuegos. Esta combinación entre lógica, seguridad y creatividad me permite tener una visión de 360º de los proyectos digitales, uniendo la funcionalidad con la protección del usuario.",
     skillsTitle: "Tecnologías y Skills",
     expTitle: "Mi",
     expHighlight: "Camino",
@@ -205,8 +207,9 @@ const translations = {
     ],
     serviceList: [
       { icon: <FaCode />, title: "Web Dev", desc: "Apps de alto rendimiento con Next.js." },
-      { icon: <FaServer />, title: "Backend", desc: "APIs escalables en Node.js." },
-      { icon: <FaMobileAlt />, title: "Mobile", desc: "Apps con React Native." }
+      { icon: <FaServer />, title: "Backend", desc: "APIs escalables en Node.js y PHP." },
+      { icon: <FaMobileAlt />, title: "Mobile", desc: "Apps híbridas con React Native." },
+      { icon: <SiLinux />, title: "Linux & DevOps", desc: "Gestión de servidores y contenedores Docker." }
     ],
     projectList: [
       { title: "Sunset Landscape", desc: "Sistema hotelero completo con panel administrativo e interfaz de cliente." },
@@ -288,7 +291,7 @@ function GallerySection({ title }: { title: string }) {
       </div>
 
 
-{/* estilizacao do botao carrossel */}
+      {/* estilizacao do botao carrossel */}
       <style jsx global>{`
         .swiper-button-next, .swiper-button-prev {
           color: #3b82f6 !important;
@@ -422,7 +425,7 @@ export default function Home() {
   return (
     <div className="bg-black text-zinc-100 min-h-screen font-sans selection:bg-blue-500/30 overflow-x-hidden">
 
-    {/* Caso não tenha um link para abrir o projeto */}
+      {/* Caso não tenha um link para abrir o projeto */}
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
@@ -460,7 +463,7 @@ export default function Home() {
       </AnimatePresence>
 
 
-        {/* fundo Personalizado (alterar futuramente) :)*/}
+      {/* fundo Personalizado (alterar futuramente) :)*/}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full opacity-50" />
@@ -586,16 +589,18 @@ export default function Home() {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
-                <FaShieldAlt className="text-blue-500 mb-2 text-2xl" />
-                <h4 className="font-bold text-white">Security First</h4>
-                <p className="text-xs text-zinc-500">Pentest & Defesa</p>
-              </div>
+
               <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
                 <FaCode className="text-blue-500 mb-2 text-2xl" />
                 <h4 className="font-bold text-white">Full Stack</h4>
                 <p className="text-xs text-zinc-500">React & Next.js</p>
               </div>
+              <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
+                <FaGlobeAmericas className="text-blue-500 mb-2 text-2xl" />
+                <h4 className="font-bold text-white">Global Communication</h4>
+                <p className="text-xs text-zinc-500">English – Intermediate</p>
+              </div>
+
             </div>
             <div className="col-span-full">
               <TechMarquee />
@@ -622,10 +627,13 @@ export default function Home() {
           </div>
         </section>
 
+
+        
+        {/* Especialidades */}
         <section className="py-24">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-4xl text-center font-black mb-16 text-white uppercase tracking-tighter">{t.servicesTitle}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {t.serviceList.map((service, idx) => (
                 <motion.div whileHover={{ y: -5 }} key={idx} className="p-8 bg-zinc-900/30 border border-white/5 rounded-3xl text-center space-y-4 hover:border-blue-500/30 transition-all">
                   <div className="text-3xl text-blue-500 flex justify-center">{service.icon}</div>
