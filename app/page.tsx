@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //biblioteca das animações
 import { motion, AnimatePresence } from "framer-motion";
@@ -235,7 +235,6 @@ const imagensGaleria = [
   { url: "/FormaturaSenai.jpeg", tipo: "Formatura", label: "SENAI Armando de Arruda Pereira 2025" },
 ];
 
-
 //função da galeria junto com os carrosseis
 function GallerySection({ title }: { title: string }) {
   return (
@@ -419,8 +418,54 @@ export default function Home() {
   const [lang, setLang] = useState<"pt" | "en" | "es">("pt");
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const t = translations[lang];
+  const [commits, setCommits] = useState(null);
+  const [email, setEmail] = useState("");
+  const [menssagem, setMensagem] = useState("");
+  const [nome, setNome] = useState("");
+
+  async function enviarEmail(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      const res = await fetch("api/contato", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome,
+          email,
+          menssagem,
+        }),
+      })
+      setNome("");
+      setEmail("");
+      setMensagem("");
+
+      console.log(res)
+
+
+    } catch (err) {
+      console.log("error")
+    }
+  }
+
+
+  // leitura dos commits
+  useEffect(() => {
+    async function loadCommits() {
+      try {
+        const res = await fetch("/api/github/commits");
+        const json = await res.json();
+        console.log(json)
+        setCommits(json.total);
+      } catch (err) {
+        console.error("Erro ao buscar commits", err);
+      }
+    }
+
+    loadCommits();
+  }, []);
 
   return (
     <div className="bg-black text-zinc-100 min-h-screen font-sans selection:bg-blue-500/30 overflow-x-hidden">
@@ -561,7 +606,15 @@ export default function Home() {
               </div>
               <div className="flex flex-col items-center md:items-start">
                 <div className="flex items-center gap-3">
-                  <span className="text-4xl md:text-5xl font-black text-white">271</span>
+                  <span className="text-4xl md:text-5xl font-black text-white min-w-[60px]">
+                    {commits !== null ? (
+                      commits
+                    ) : (
+                      <div className="flex items-center justify-center h-10 w-10">
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+                      </div>
+                    )}
+                  </span>
                   <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
                     {t.stats.commits}
                   </p>
@@ -628,7 +681,7 @@ export default function Home() {
         </section>
 
 
-        
+
         {/* Especialidades */}
         <section className="py-24">
           <div className="max-w-7xl mx-auto px-6">
@@ -685,10 +738,30 @@ export default function Home() {
                 <a href="https://github.com/GiovanniBBenedetti" target="_blank" className="p-4 bg-zinc-900 rounded-full border border-white/5 hover:text-blue-500 transition-colors"><FaGithub size={20} /></a>
               </div>
             </div>
-            <form className="bg-zinc-900/50 p-8 rounded-3xl border border-white/5 backdrop-blur-xl space-y-4 shadow-2xl">
-              <input type="text" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all" placeholder={t.formName} />
-              <input type="email" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all" placeholder={t.formEmail} />
-              <textarea rows={4} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all" placeholder={t.formMsg} />
+            <form onSubmit={enviarEmail} className="bg-zinc-900/50 p-8 rounded-3xl border border-white/5 backdrop-blur-xl space-y-4 shadow-2xl">
+              <input
+                type="text"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all"
+                placeholder={t.formName}
+              />
+
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all"
+                placeholder={t.formEmail}
+              />
+
+              <textarea
+                rows={4}
+                value={menssagem}
+                onChange={(e) => setMensagem(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all"
+                placeholder={t.formMsg}
+              />
               <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all">
                 {t.formBtn} <FaPaperPlane />
               </button>
