@@ -92,7 +92,10 @@ const translations = {
       { title: "Zelos", desc: "Sistema de gerenciamento de chamados desenvolvido para o SENAI. Otimiza o suporte interno e a manutenção da instituição." }
     ],
     galleryTitle: "Galeria",
+    alertSuccessTitle: "Mensagem Enviada!",
+    alertSuccessDesc: "Obrigado pelo contato! Em breve retornarei sua mensagem.",
   },
+
   en: {
     nav: ["Home", "Projects", "Gallery", "About", "Experience", "Contact"],
     status: "Available for new projects",
@@ -157,6 +160,8 @@ const translations = {
       { title: "Zelos", desc: "Ticketing management system developed for SENAI. Optimizes internal support and institutional maintenance." }
     ],
     galleryTitle: "Gallery",
+    alertSuccessTitle: "Message Sent!",
+    alertSuccessDesc: "Thanks for reaching out! I'll get back to you soon.",
   },
   es: {
     nav: ["Inicio", "Proyectos", "Galería", "Sobre", "Experiencia", "Contacto"],
@@ -222,6 +227,8 @@ const translations = {
       { title: "Zelos", desc: "Sistema de gestión de tickets desarrollado para el SENAI. Optimiza el soporte interno y el mantenimiento." }
     ],
     galleryTitle: "Galería",
+    alertSuccessTitle: "¡Mensaje Enviado!",
+    alertSuccessDesc: "¡Gracias por contactar! Pronto responderé a tu mensaje.",
   }
 };
 
@@ -423,33 +430,35 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [menssagem, setMensagem] = useState("");
   const [nome, setNome] = useState("");
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
+
+
+
+  //Função para enviar o email (contato)
   async function enviarEmail(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsSending(true);
     try {
       const res = await fetch("api/contato", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nome,
-          email,
-          menssagem,
-        }),
-      })
-      setNome("");
-      setEmail("");
-      setMensagem("");
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, email, menssagem }),
+      });
 
-      console.log(res)
-
-
+      if (res.ok) {
+        setNome("");
+        setEmail("");
+        setMensagem("");
+        setIsSuccessOpen(true);
+      }
     } catch (err) {
-      console.log("error")
+      console.log("error");
+    } finally {
+      setIsSending(false);
     }
   }
-
 
   // leitura dos commits
   useEffect(() => {
@@ -501,6 +510,40 @@ export default function Home() {
                 className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
               >
                 <FaTimes size={20} />
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+
+
+      {/* Modal confirmação contato */}
+      <AnimatePresence>
+        {isSuccessOpen && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center px-4">
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setIsSuccessOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-md bg-zinc-900 border border-white/10 p-8 rounded-3xl shadow-2xl text-center"
+            >
+              {/* Ícone de check azul */}
+              <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FaPaperPlane className="text-blue-500 text-2xl" />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">{(t as any).alertSuccessTitle}</h3>
+              <p className="text-zinc-400 mb-8 leading-relaxed">{(t as any).alertSuccessDesc}</p>
+              <button
+                onClick={() => setIsSuccessOpen(false)}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all"
+              >
+                Excelente
               </button>
             </motion.div>
           </div>
@@ -646,7 +689,7 @@ export default function Home() {
               <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
                 <FaCode className="text-blue-500 mb-2 text-2xl" />
                 <h4 className="font-bold text-white">Full Stack</h4>
-                <p className="text-xs text-zinc-500">React & Next.js</p>
+                <p className="text-xs text-zinc-500">React, Next.js & NodeJs</p>
               </div>
               <div className="p-6 bg-zinc-900/50 rounded-2xl border border-white/5 backdrop-blur-lg">
                 <FaGlobeAmericas className="text-blue-500 mb-2 text-2xl" />
@@ -762,14 +805,29 @@ export default function Home() {
                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all"
                 placeholder={t.formMsg}
               />
-              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all">
-                {t.formBtn} <FaPaperPlane />
+              <button
+                disabled={isSending}
+                className={`w-full font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all ${isSending
+                    ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                  }`}
+              >
+                {isSending ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-zinc-400"></div>
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    {t.formBtn} <FaPaperPlane />
+                  </>
+                )}
               </button>
             </form>
           </div>
         </section>
       </main>
-
+      
       <footer className="py-12 text-center border-t border-white/5 bg-black text-zinc-600 text-sm">
         © {new Date().getFullYear()} Giovanni Benedetti • {t.footer}
       </footer>
