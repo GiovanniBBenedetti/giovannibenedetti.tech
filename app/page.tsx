@@ -26,6 +26,9 @@ import {
   SiTypescript, SiNextdotjs, SiTailwindcss, SiLinux, SiMysql
 } from "react-icons/si";
 
+//fundo personalizado adiciuonado
+import Particles from '@/components/Particles'
+
 //criação das linguas pt/en/es
 const translations = {
   pt: {
@@ -601,21 +604,51 @@ export default function Home() {
 
       <main className="relative z-10">
 
-        {/* Inicio(Apresentação) */}
-        <section id="inicio" className="relative flex flex-col items-center justify-center min-h-screen px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="space-y-6 pt-20">
-            <span className="px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest">{t.status}</span>
+
+
+        
+        <section id="inicio" className="relative flex flex-col items-center justify-center min-h-screen px-4 text-center overflow-hidden bg-black">
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Particles
+              className="h-full w-full"
+              particleColors={['#ffffff', '#155dfc']}
+              particleCount={200}
+              particleSpread={10}
+              speed={0.1}
+              particleBaseSize={100}
+              moveParticlesOnHover={true}
+              alphaParticles={false}
+              disableRotation={false}
+            />
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative z-10 space-y-6 pt-20"
+          >
+            <span className="px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest">
+              {t.status}
+            </span>
             <h1 className="text-6xl md:text-[7rem] font-black tracking-tighter bg-gradient-to-b from-white via-white to-zinc-600 bg-clip-text text-transparent leading-none">
               {t.heroTitle}
             </h1>
             <div className="text-2xl md:text-4xl text-blue-500 font-mono font-bold">
-              <Typewriter key={lang} options={{ strings: t.heroSubtitle, autoStart: true, loop: true }} />
+              <Typewriter
+                key={lang}
+                options={{
+                  strings: t.heroSubtitle,
+                  autoStart: true,
+                  loop: true
+                }}
+              />
             </div>
             <p className="max-w-xl mx-auto text-zinc-400 text-lg md:text-xl leading-relaxed">
               {t.heroDesc}
             </p>
+
             <div className="flex justify-center gap-4 pt-4">
-              <a href="#projetos" className="bg-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all">
+              <a href="#projetos" className="bg-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all text-white">
                 {t.btnProjects}
               </a>
               <a href="#contato" className="border border-white/10 px-8 py-3 rounded-xl font-bold hover:bg-zinc-900 transition-all text-white">
@@ -650,9 +683,7 @@ export default function Home() {
               <div className="flex flex-col items-center md:items-start">
                 <div className="flex items-center gap-3">
                   <span className="text-4xl md:text-5xl font-black text-white min-w-[60px]">
-                    {commits !== null ? (
-                      commits
-                    ) : (
+                    {commits !== null ? commits : (
                       <div className="flex items-center justify-center h-10 w-10">
                         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
                       </div>
@@ -808,8 +839,8 @@ export default function Home() {
               <button
                 disabled={isSending}
                 className={`w-full font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all ${isSending
-                    ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                  ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700 text-white"
                   }`}
               >
                 {isSending ? (
@@ -827,7 +858,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      
+
       <footer className="py-12 text-center border-t border-white/5 bg-black text-zinc-600 text-sm">
         © {new Date().getFullYear()} Giovanni Benedetti • {t.footer}
       </footer>
