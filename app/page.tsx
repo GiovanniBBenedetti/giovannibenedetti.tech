@@ -32,7 +32,7 @@ import Particles from '@/components/Particles'
 //criação das linguas pt/en/es
 const translations = {
   pt: {
-    nav: ["Início", "Projetos", "Galeria", "Sobre", "Experiência", "Contato"],
+    nav: ["Início", "Sobre", "Projetos", "Galeria", "Experiência", "Contato"],
     status: "Disponível para novos projetos",
     heroTitle: "Giovanni Benedetti",
     heroSubtitle: ["Desenvolvedor Full Stack", "Estudante de Cibersegurança", "Solucionador de Problemas"],
@@ -100,7 +100,7 @@ const translations = {
   },
 
   en: {
-    nav: ["Home", "Projects", "Gallery", "About", "Experience", "Contact"],
+    nav: ["Home", "About", "Projects", "Gallery", "Experience", "Contact"],
     status: "Available for new projects",
     heroTitle: "Giovanni Benedetti",
     heroSubtitle: ["Full Stack Developer", "Cybersecurity Student", "Problem Solver"],
@@ -167,7 +167,7 @@ const translations = {
     alertSuccessDesc: "Thanks for reaching out! I'll get back to you soon.",
   },
   es: {
-    nav: ["Inicio", "Proyectos", "Galería", "Sobre", "Experiencia", "Contacto"],
+    nav: ["Inicio", "Sobre", "Proyectos", "Galería", "Experiencia", "Contacto"],
     status: "Disponible para proyectos",
     heroTitle: "Giovanni Benedetti",
     heroSubtitle: ["Full Stack Dev", "Seguridad Estudiante", "Problem Solver"],
@@ -568,7 +568,7 @@ export default function Home() {
           <div className="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
             {t.nav.map((item, idx) => {
 
-              const targetIds = ["inicio", "projetos", "galeria", "sobre", "experiencia", "contato"];
+              const targetIds = ["inicio", "sobre", "projetos", "galeria", "experiencia", "contato"];
 
               return (
                 <a
@@ -606,7 +606,7 @@ export default function Home() {
 
 
 
-        
+
         <section id="inicio" className="relative flex flex-col items-center justify-center min-h-screen px-4 text-center overflow-hidden bg-black">
           <div className="absolute inset-0 z-0 pointer-events-none">
             <Particles
