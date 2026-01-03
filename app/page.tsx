@@ -86,9 +86,6 @@ const translations = {
     ],
     projectList: [
       { title: "Sunset Landscape", desc: "Sistema hoteleiro completo com painel administrativo e interface de cliente para reservas." },
-      { title: "Cristallo", desc: "E-commerce de luxo focado em pulseiras femininas com design elegante e alta performance." },
-      { title: "SampaTicket", desc: "Plataforma de ingressos para a Grande SP com listagem categorizada e checkout simulado." },
-      { title: "Blockbuster Revive", desc: "Interface nostálgica da antiga locadora com catálogo de filmes e design retrô." },
       { title: "Lumier", desc: "Sistema de gestão de blogs escolares para publicação de conteúdos educativos." },
       { title: "BandMatch", desc: "Rede social para músicos encontrarem integrantes e pesquisarem cifras de músicas." },
       { title: "MusicHouse", desc: "Sistema robusto de gerenciamento de estoque e controle de franquias para lojas de música." },
@@ -154,9 +151,6 @@ const translations = {
     ],
     projectList: [
       { title: "Sunset Landscape", desc: "Complete hotel system with admin panel and client booking interface." },
-      { title: "Cristallo", desc: "Luxury e-commerce for women's bracelets with elegant design and high performance." },
-      { title: "SampaTicket", desc: "Ticket platform for Greater SP featuring categorized listings and checkout." },
-      { title: "Blockbuster Revive", desc: "Nostalgic video store interface with movie catalog and retro design." },
       { title: "Lumier", desc: "School blog management system for educational content publishing." },
       { title: "BandMatch", desc: "Social network for musicians to find members and search for song chords." },
       { title: "MusicHouse", desc: "Robust inventory management and franchise control system for musical instrument stores." },
@@ -221,9 +215,6 @@ const translations = {
     ],
     projectList: [
       { title: "Sunset Landscape", desc: "Sistema hotelero completo con panel administrativo e interfaz de cliente." },
-      { title: "Cristallo", desc: "E-commerce de lujo para pulseras con diseño elegante y alto rendimiento." },
-      { title: "SampaTicket", desc: "Plataforma de entradas para el Gran SP con listado categorizado." },
-      { title: "Blockbuster Revive", desc: "Interfaz nostálgica de videotienda con catálogo de películas." },
       { title: "Lumier", desc: "Sistema de gestión de blogs escolares para contenido educativo." },
       { title: "BandMatch", desc: "Red social para músicos y búsqueda de acordes integrada." },
       { title: "MusicHouse", desc: "Sistema robusto de gestión de inventario y control de franquicias para tiendas de música." },
@@ -366,9 +357,6 @@ function TechMarquee() {
 
 const projetosiconesImagens = [
   { tags: ["PHP", "CSS", "BOOTSTRAP"], github: "https://github.com/GiovanniBBenedetti/SunsetLandscape", link: "", image: "/Sunset.png" },
-  { tags: ["HTML", "CSS", "BOOTSTRAP"], github: "https://github.com/GiovanniBBenedetti/Cristallo", link: "https://giovannibbenedetti.github.io/Cristallo/", image: "/Cristallo.png" },
-  { tags: ["HTML", "CSS", "JAVASCRIPT"], github: "https://github.com/GiovanniBBenedetti/SampaTicket", link: "https://giovannibbenedetti.github.io/SampaTicket/", image: "/Sampa.png" },
-  { tags: ["HTML", "CSS", "JAVASCRIPT"], github: "https://github.com/GiovanniBBenedetti/Blockbuster-LLC", link: "https://giovannibbenedetti.github.io/Blockbuster-LLC/", image: "/blockbuster.png" },
   { tags: ["NODE JS", "NEXT JS", "AZURE", "MYSQL",], github: "https://github.com/GiovanniBBenedetti/Lumier.git", link: "", image: "/LumierLogo.png" },
   { tags: ["NEXT JS", "API CIFRACLUB"], github: "https://github.com/GiovanniBBenedetti/BandMatch.git", link: "", image: "/BandMatch.png" },
   { tags: ["NEXTJS", "NODE JS", "MYSQL", "NODEMAILER", "JWT", "EXPRESS", "TAILWIND CSS"], github: "https://github.com/pachec0js/MusicHouse", link: "", image: "/MusicHouse.png" },
