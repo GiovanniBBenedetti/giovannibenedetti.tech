@@ -804,6 +804,7 @@ export default function Home() {
               <input
                 type="text"
                 value={nome}
+                required
                 onChange={(e) => setNome(e.target.value)}
                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all"
                 placeholder={t.formName}
@@ -812,6 +813,7 @@ export default function Home() {
               <input
                 type="email"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all"
                 placeholder={t.formEmail}
@@ -820,6 +822,7 @@ export default function Home() {
               <textarea
                 rows={4}
                 value={menssagem}
+                required
                 onChange={(e) => setMensagem(e.target.value)}
                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 focus:border-blue-500 outline-none transition-all"
                 placeholder={t.formMsg}
