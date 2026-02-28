@@ -18,7 +18,7 @@ import 'swiper/css/pagination';
 //biblioteca dos icone utilizados
 import {
   FaGithub, FaExternalLinkAlt, FaGlobe, FaLinkedin,
-  FaPaperPlane, FaCode, FaShieldAlt,
+  FaPaperPlane, FaCode,
   FaServer, FaMobileAlt, FaExclamationTriangle, FaTimes,
   FaJs, FaReact, FaNodeJs, FaDocker, FaPhp, FaGlobeAmericas
 } from "react-icons/fa";
@@ -417,7 +417,6 @@ export default function Home() {
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const t = translations[lang];
-  const [commits, setCommits] = useState(null);
   const [email, setEmail] = useState("");
   const [menssagem, setMensagem] = useState("");
   const [nome, setNome] = useState("");
@@ -451,21 +450,6 @@ export default function Home() {
     }
   }
 
-  // leitura dos commits
-  useEffect(() => {
-    async function loadCommits() {
-      try {
-        const res = await fetch("/api/github/commits");
-        const json = await res.json();
-        console.log(json)
-        setCommits(json.total);
-      } catch (err) {
-        console.error("Erro ao buscar commits", err);
-      }
-    }
-
-    loadCommits();
-  }, []);
 
   return (
     <div className="bg-black text-zinc-100 min-h-screen font-sans selection:bg-blue-500/30 overflow-x-hidden">
@@ -643,42 +627,33 @@ export default function Home() {
                 {t.btnContact}
               </a>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 max-w-4xl mx-auto border-t border-white/5 mt-10">
-              <div className="flex flex-col items-center md:items-start">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-16 max-w-4xl mx-auto border-t border-white/5 mt-10">
+
+              <div className="flex flex-col items-center justify-center">
                 <div className="flex items-center gap-3">
                   <span className="text-4xl md:text-5xl font-black text-white">2</span>
-                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
+                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-center leading-tight whitespace-pre-line">
                     {t.stats.exp}
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col items-center md:items-start">
+
+
+              <div className="flex flex-col items-center justify-center">
                 <div className="flex items-center gap-3">
                   <span className="text-4xl md:text-5xl font-black text-white">10</span>
-                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
+                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-center leading-tight whitespace-pre-line">
                     {t.stats.projects}
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col items-center md:items-start">
+
+
+              <div className="flex flex-col items-center justify-center">
                 <div className="flex items-center gap-3">
-                  <span className="text-4xl md:text-5xl font-black text-white">10</span>
-                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
+                  <span className="text-4xl md:text-5xl font-black text-white">15</span>
+                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-center leading-tight whitespace-pre-line">
                     {t.stats.techs}
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col items-center md:items-start">
-                <div className="flex items-center gap-3">
-                  <span className="text-4xl md:text-5xl font-black text-white min-w-[60px]">
-                    {commits !== null ? commits : (
-                      <div className="flex items-center justify-center h-10 w-10">
-                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-                      </div>
-                    )}
-                  </span>
-                  <p className="text-zinc-500 text-xs md:text-sm uppercase font-bold text-left leading-tight whitespace-pre-line">
-                    {t.stats.commits}
                   </p>
                 </div>
               </div>
