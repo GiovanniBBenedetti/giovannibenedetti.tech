@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 //biblioteca das animações
 import { motion, AnimatePresence } from "framer-motion";
@@ -87,9 +87,11 @@ const translations = {
     projectList: [
       { title: "Sunset Landscape", desc: "Sistema hoteleiro completo com painel administrativo e interface de cliente para reservas." },
       { title: "Lumier", desc: "Sistema de gestão de blogs escolares para publicação de conteúdos educativos." },
-      { title: "BandMatch", desc: "Rede social para músicos encontrarem integrantes e pesquisarem cifras de músicas." },
       { title: "MusicHouse", desc: "Sistema robusto de gerenciamento de estoque e controle de franquias para lojas de música." },
-      { title: "Zelos", desc: "Sistema de gerenciamento de chamados desenvolvido para o SENAI. Otimiza o suporte interno e a manutenção da instituição." }
+      { title: "Zelos", desc: "Sistema de gerenciamento de chamados desenvolvido para o SENAI. Otimiza o suporte interno e a manutenção da instituição." },
+    { title: "Port Scanner CVE", desc: "Script desenvolvido para identificar vulnerabilidades em um ambiente simulado e isolado, realizando varredura de portas, banner grabbing e correlação automática com CVEs por serviço." },
+      { title: "AWS CloudLab", desc: "Arquitetura de infraestrutura em nuvem na AWS, com containers, banco de dados gerenciado e boas práticas de segurança." },
+
     ],
     galleryTitle: "Galeria",
     alertSuccessTitle: "Mensagem Enviada!",
@@ -152,9 +154,10 @@ const translations = {
     projectList: [
       { title: "Sunset Landscape", desc: "Complete hotel system with admin panel and client booking interface." },
       { title: "Lumier", desc: "School blog management system for educational content publishing." },
-      { title: "BandMatch", desc: "Social network for musicians to find members and search for song chords." },
       { title: "MusicHouse", desc: "Robust inventory management and franchise control system for musical instrument stores." },
-      { title: "Zelos", desc: "Ticketing management system developed for SENAI. Optimizes internal support and institutional maintenance." }
+      { title: "Zelos", desc: "Ticketing management system developed for SENAI. Optimizes internal support and institutional maintenance." },
+     { title: "Port Scanner CVE", desc: "Script built to identify vulnerabilities in a simulated, isolated environment, performing port scanning, banner grabbing, and automated CVE correlation per service." },
+      { title: "AWS CloudLab", desc: "Cloud infrastructure architecture on AWS, featuring containers, managed databases, and security best practices." },
     ],
     galleryTitle: "Gallery",
     alertSuccessTitle: "Message Sent!",
@@ -216,9 +219,10 @@ const translations = {
     projectList: [
       { title: "Sunset Landscape", desc: "Sistema hotelero completo con panel administrativo e interfaz de cliente." },
       { title: "Lumier", desc: "Sistema de gestión de blogs escolares para contenido educativo." },
-      { title: "BandMatch", desc: "Red social para músicos y búsqueda de acordes integrada." },
       { title: "MusicHouse", desc: "Sistema robusto de gestión de inventario y control de franquicias para tiendas de música." },
-      { title: "Zelos", desc: "Sistema de gestión de tickets desarrollado para el SENAI. Optimiza el soporte interno y el mantenimiento." }
+      { title: "Zelos", desc: "Sistema de gestión de tickets desarrollado para el SENAI. Optimiza el soporte interno y el mantenimiento." },
+     { title: "Port Scanner CVE", desc: "Script desarrollado para identificar vulnerabilidades en un entorno simulado y aislado, realizando escaneo de puertos, banner grabbing y correlación automática con CVEs por servicio." },
+      { title: "AWS CloudLab", desc: "Arquitectura de infraestructura en la nube en AWS, con contenedores, base de datos gestionada y buenas prácticas de seguridad." },
     ],
     galleryTitle: "Galería",
     alertSuccessTitle: "¡Mensaje Enviado!",
@@ -358,12 +362,11 @@ function TechMarquee() {
 const projetosiconesImagens = [
   { tags: ["PHP", "CSS", "BOOTSTRAP"], github: "https://github.com/GiovanniBBenedetti/SunsetLandscape", link: "", image: "/Sunset.png" },
   { tags: ["NODE JS", "NEXT JS", "AZURE", "MYSQL",], github: "https://github.com/GiovanniBBenedetti/Lumier.git", link: "", image: "/LumierLogo.png" },
-  { tags: ["NEXT JS", "API CIFRACLUB"], github: "https://github.com/GiovanniBBenedetti/BandMatch.git", link: "", image: "/BandMatch.png" },
   { tags: ["NEXTJS", "NODE JS", "MYSQL", "NODEMAILER", "JWT", "EXPRESS", "TAILWIND CSS"], github: "https://github.com/pachec0js/MusicHouse", link: "", image: "/MusicHouse.png" },
   { tags: ["NEXTJS", "NODE JS", "MYSQL", "JWT", "EXPRESS", "CSS", "PASSPORTJS"], github: "https://github.com/GiovanniBBenedetti/projetoZelosSenai", link: "", image: "/Zelos.png" },
+  { tags: ["NMAP", "SHELL", "SQLMAP", "CURL", "CVE"], github: "https://github.com/GiovanniBBenedetti/PortScanner", link: "", image: "/PortScanner.jpeg" },
+  { tags: ["AWS", "ECS", "DOCKER", "RDS"], github: "https://github.com/Saravtb/cloudlab", link: "", image: "/diagrama-v1.1.svg" },
 ];
-
-
 
 // Função para os cards do projeto
 function ProjectCard({ title, desc, asset, index, onAlert }: any) {
