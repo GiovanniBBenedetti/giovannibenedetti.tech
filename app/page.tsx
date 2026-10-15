@@ -20,7 +20,8 @@ import {
   FaGithub, FaExternalLinkAlt, FaGlobe, FaLinkedin,
   FaPaperPlane, FaCode,
   FaServer, FaMobileAlt, FaExclamationTriangle, FaTimes,
-  FaJs, FaReact, FaNodeJs, FaDocker, FaPhp, FaGlobeAmericas
+  FaJs, FaReact, FaNodeJs, FaDocker, FaPhp, FaGlobeAmericas,
+  FaBars
 } from "react-icons/fa";
 import {
   SiTypescript, SiNextdotjs, SiTailwindcss, SiLinux, SiMysql
@@ -195,7 +196,7 @@ const translations = {
     formBtn: "Enviar",
     footer: "Construido con Next.js & Tailwind.",
     modalTitle: "Enlace no disponible",
-    modalDesc: "¡Este projeto ainda está em fase de deploy ou o repositório é privado por questões de segurança!",
+    modalDesc: "Este proyecto aún está en fase de despliegue o el repositorio es privado por razones de seguridad. ¡Contáctame para más detalles!",
     expList: [
       {
         date: "2026 - 2027",
@@ -207,7 +208,7 @@ const translations = {
         date: "2024 - 2025",
         title: "Técnico en Desarrollo de Sistemas",
         company: "Escuela SENAI Armando de Arruda Pereira",
-        desc: "Formación técnica en lógica de programação, arquitetura de software e bases de dados."
+        desc: "Formación técnica en lógica de programación, arquitectura de software y bases de datos."
       }
     ],
     serviceList: [
@@ -419,6 +420,7 @@ export default function Home() {
   const [lang, setLang] = useState<"pt" | "en" | "es">("pt");
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = translations[lang];
   const [email, setEmail] = useState("");
   const [menssagem, setMensagem] = useState("");
@@ -542,9 +544,7 @@ export default function Home() {
           <div className="text-2xl font-black tracking-tighter">G<span className="text-blue-500">B</span></div>
           <div className="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
             {t.nav.map((item, idx) => {
-
               const targetIds = ["inicio", "sobre", "projetos", "galeria", "experiencia", "contato"];
-
               return (
                 <a
                   key={idx}
@@ -556,7 +556,7 @@ export default function Home() {
               );
             })}
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <div className="relative">
               <button onClick={() => setShowLangMenu(!showLangMenu)} className="flex items-center gap-2 bg-zinc-900 border border-white/10 px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-zinc-800 transition-colors">
                 <FaGlobe className="text-blue-500" /> <span className="uppercase">{lang}</span>
@@ -573,8 +573,43 @@ export default function Home() {
                 )}
               </AnimatePresence>
             </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors"
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+            </button>
           </div>
         </nav>
+
+        {/* Menu mobile */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden overflow-hidden bg-black/95 border-t border-white/5"
+            >
+              <div className="flex flex-col px-6 py-4 gap-1">
+                {t.nav.map((item, idx) => {
+                  const targetIds = ["inicio", "sobre", "projetos", "galeria", "experiencia", "contato"];
+                  return (
+                    <a
+                      key={idx}
+                      href={`#${targetIds[idx]}`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-zinc-300 hover:text-blue-400 font-bold uppercase tracking-widest text-sm py-3 border-b border-white/5 last:border-0 transition-colors"
+                    >
+                      {item}
+                    </a>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       <main className="relative z-10">
