@@ -365,8 +365,8 @@ const projetosiconesImagens = [
   { tags: ["NODE JS", "NEXT JS", "AZURE", "MYSQL",], github: "https://github.com/GiovanniBBenedetti/Lumier.git", link: "", image: "/LumierLogo.png" },
   { tags: ["NEXTJS", "NODE JS", "MYSQL", "NODEMAILER", "JWT", "EXPRESS", "TAILWIND CSS"], github: "https://github.com/pachec0js/MusicHouse", link: "", image: "/MusicHouse.png" },
   { tags: ["NEXTJS", "NODE JS", "MYSQL", "JWT", "EXPRESS", "CSS", "PASSPORTJS"], github: "https://github.com/GiovanniBBenedetti/projetoZelosSenai", link: "", image: "/Zelos.png" },
-  { tags: ["NMAP", "SHELL", "SQLMAP", "CURL", "CVE"], github: "https://github.com/GiovanniBBenedetti/PortScanner", link: "", image: "/PortScanner.jpeg" },
-  { tags: ["AWS", "ECS", "DOCKER", "RDS"], github: "https://github.com/Saravtb/cloudlab", link: "", image: "/diagrama-v1.1.svg" },
+  { tags: ["NMAP", "SHELL", "SQLMAP", "CURL", "CVE"], github: "https://github.com/GiovanniBBenedetti/PortScanner", link: "", image: "/PortScanner.jpeg", hideLink: true },
+  { tags: ["AWS", "ECS", "DOCKER", "RDS"], github: "https://github.com/Saravtb/cloudlab", link: "", image: "/diagrama-v1.1.svg", hideLink: true },
 ];
 
 // Função para os cards do projeto
@@ -398,7 +398,9 @@ function ProjectCard({ title, desc, asset, index, onAlert }: any) {
           <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{title}</h3>
           <div className="flex gap-3 text-zinc-400">
             <a href={asset.github} onClick={(e) => handleLinkClick(e, asset.github)} target="_blank" rel="noopener noreferrer" className="hover:text-white"><FaGithub size={18} /></a>
-            <a href={asset.link} onClick={(e) => handleLinkClick(e, asset.link)} target="_blank" rel="noopener noreferrer" className="hover:text-white"><FaExternalLinkAlt size={16} /></a>
+            {!asset.hideLink && (
+              <a href={asset.link} onClick={(e) => handleLinkClick(e, asset.link)} target="_blank" rel="noopener noreferrer" className="hover:text-white"><FaExternalLinkAlt size={16} /></a>
+            )}
           </div>
         </div>
         <p className="text-zinc-400 text-sm mb-4">{desc}</p>
